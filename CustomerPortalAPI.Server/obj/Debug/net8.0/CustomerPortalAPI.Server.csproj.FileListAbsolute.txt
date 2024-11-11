@@ -35,3 +35,4 @@ C:\Users\lab_services_student\source\repos\CustomerPortalAPI\CustomerPortalAPI.S
 C:\Users\lab_services_student\source\repos\CustomerPortalAPI\CustomerPortalAPI.Server\obj\Debug\net8.0\CustomerPortalAPI.Server.genruntimeconfig.cache
 C:\Users\lab_services_student\source\repos\CustomerPortalAPI\CustomerPortalAPI.Server\obj\Debug\net8.0\ref\CustomerPortalAPI.Server.dll
 C:\Users\lab_services_student\source\repos\CustomerPortalAPI\CustomerPortalAPI.Server\bin\Debug\net8.0\package-lock.json
+C:\Users\lab_services_student\source\repos\CustomerPortalAPI\CustomerPortalAPI.Server\obj\Debug\net8.0\CustomerPortalAPI.Server.sourcelink.json
