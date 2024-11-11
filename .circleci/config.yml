@@ -10,7 +10,7 @@ jobs:
   sonar_scan:
     executor: dotnet-executor
     steps:
-      - checkout  # Step to checkout the code from the repository
+      - checkout  # Pull the code from the repository
       - run:
           name: Install Node.js
           command: |
