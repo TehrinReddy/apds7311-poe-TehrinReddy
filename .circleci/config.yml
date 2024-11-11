@@ -29,6 +29,7 @@ jobs:
           name: Run SonarQube Scan
           command: |
             export PATH="$PATH:/root/.dotnet/tools"
+            echo "SONAR_TOKEN is: $SONAR_TOKEN"
             dotnet-sonarscanner begin /k:"TehrinReddy_apds7311-poe-TehrinReddy" /o:"tehrinreddy" /d:sonar.host.url="https://sonarcloud.io/" /d:sonar.login="$SONAR_TOKEN"
             dotnet build CustomerPortalAPI.Server/CustomerPortalAPI.Server.csproj  # Specify the project file
             dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
