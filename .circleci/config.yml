@@ -26,7 +26,7 @@ jobs:
           name: Run SonarQube Scanner
           command: |
             sonar-scanner \
-              -Dsonar.projectKey=my-app \
+              -Dsonar.projectKey=TehrinReddy_apds7311-poe-TehrinReddy \
               -Dsonar.sources=. \
               -Dsonar.host.url=${SONAR_HOST_URL} \
               -Dsonar.login=${SONAR_TOKEN}
