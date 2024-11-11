@@ -1,41 +1,42 @@
 version: 2.1
 
 executors:
-  dotnet-executor:
+  node-executor:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:8.0  # Use .NET 8.0 SDK image
-    working_directory: ~/project/customerportalapi.client
+      - image: circleci/node:14
 
 jobs:
-  sonar_scan:
-    executor: dotnet-executor
+  build:
+    executor: node-executor
     steps:
-      - checkout  # Pull the code from the repository
-      - run:
-          name: Install Node.js
-          command: |
-            curl -sL https://deb.nodesource.com/setup_18.x | bash -
-            apt-get install -y nodejs
+      - checkout
       - run:
           name: Install Dependencies
-          command: dotnet restore CustomerPortalAPI.Server/CustomerPortalAPI.Server.csproj  # Specify the project file
+          command: cd client && npm install
       - run:
-          name: Build Project
-          command: dotnet build CustomerPortalAPI.Server/CustomerPortalAPI.Server.csproj  # Specify the project file
+          name: Run Tests
+          command: cd client && npm test
+
+  sonarqube_scan:
+    docker:
+      - image: sonarsource/sonar-scanner-cli:latest
+    steps:
+      - checkout
       - run:
-          name: Install SonarScanner for .NET
-          command: dotnet tool install --global dotnet-sonarscanner
-      - run:
-          name: Run SonarQube Scan
+          name: Run SonarQube Scanner
           command: |
-            export PATH="$PATH:/root/.dotnet/tools"
-            echo "SONAR_TOKEN is: $SONAR_TOKEN"
-            dotnet-sonarscanner begin /k:"TehrinReddy_apds7311-poe-TehrinReddy" /o:"tehrinreddy" /d:sonar.host.url="https://sonarcloud.io/" /d:sonar.login="$SONAR_TOKEN"
-            dotnet build CustomerPortalAPI.Server/CustomerPortalAPI.Server.csproj  # Specify the project file
-            dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+            sonar-scanner \
+              -Dsonar.projectKey=TehrinReddy_apds7311-poe-TehrinReddy \
+              -Dsonar.organization=tehrinreddy \
+              -Dsonar.sources=client \
+              -Dsonar.host.url=${SONAR_HOST_URL} \
+              -Dsonar.login=${SONAR_TOKEN}
 
 workflows:
   version: 2
-  sonar_workflow:
+  build_and_scan:
     jobs:
-      - sonar_scan
+      - build
+      - sonarqube_scan:
+          requires:
+            - build
