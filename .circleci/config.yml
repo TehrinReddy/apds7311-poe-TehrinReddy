@@ -12,10 +12,10 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: cd client && npm install
+          command: ~customerportalapi.client/ && npm install
       - run:
           name: Run Tests
-          command: cd client && npm test
+          command: ~customerportalapi.client/ && npm test
 
   sonarqube_scan:
     docker:
