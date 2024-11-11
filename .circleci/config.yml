@@ -4,7 +4,7 @@ executors:
   dotnet-executor:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:8.0  # Use .NET 8.0 SDK image
-    working_directory: ~/project/customerportalapi.client
+    working_directory: ~/repo
 
 jobs:
   sonar_scan:
