@@ -12,10 +12,10 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: npm install
+          command: cd client && npm install
       - run:
           name: Run Tests
-          command: npm test
+          command: cd client && npm test
 
   sonarqube_scan:
     docker:
@@ -28,7 +28,7 @@ jobs:
             sonar-scanner \
               -Dsonar.projectKey=TehrinReddy_apds7311-poe-TehrinReddy \
               -Dsonar.organization=tehrinreddy \
-              -Dsonar.sources=. \
+              -Dsonar.sources=client \
               -Dsonar.host.url=${SONAR_HOST_URL} \
               -Dsonar.login=${SONAR_TOKEN}
 
